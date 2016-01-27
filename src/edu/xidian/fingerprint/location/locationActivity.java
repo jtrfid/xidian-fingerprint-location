@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.xidian.FindBeacons.FindBeacons;
@@ -296,7 +297,10 @@ public class locationActivity extends Activity {
 	    	String dateStr = sfd.format(date);
     	    public void run() {
     	    	TextView editText = (TextView)locationActivity.this.findViewById(R.id.monitoringText);
-       	    	editText.append(dateStr+"=="+line+"\n");            	    	    		
+       	    	editText.append(dateStr+"=="+line+"\n");  
+       	        // 滚动到底部
+       	    	ScrollView sv = (ScrollView)locationActivity.this.findViewById(R.id.scrollView);
+       	    	sv.scrollTo(0, editText.getBottom());
     	    }
     	});
     }
