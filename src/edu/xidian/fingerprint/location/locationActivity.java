@@ -83,7 +83,7 @@ public class locationActivity extends Activity {
 					min_value = diff_sum;
 					min_RPname = RPname;
 				}
-				str = "参考点["+ RPname + "]rssi单位平方差="+ diff_sum;
+				str = "参考点["+ RPname + "]rssi单位平方差="+ String.format("%.2f",diff_sum);
 				LogManager.d(TAG, str);
 			    logToDisplay(str);    
 			} // for RP
