@@ -83,9 +83,9 @@ public class locationActivity extends Activity {
 					min_value = diff_sum;
 					min_RPname = RPname;
 				}
-				str = "参考点["+ RPname + "]rssi单位平方差="+ String.format("%.2f",diff_sum);
-				LogManager.d(TAG, str);
-			    logToDisplay(str);    
+				//str = "参考点["+ RPname + "]rssi单位平方差="+ String.format("%.2f",diff_sum);
+				//LogManager.d(TAG, str);
+			    //logToDisplay(str);    
 			} // for RP
 			str = "最近参考点："+min_RPname;
 			LogManager.d(TAG, str);
@@ -112,6 +112,9 @@ public class locationActivity extends Activity {
     
     /** 数据库中存储的各个定位参考点的beacons的rssi平均值 */
     List<RssiInfo> mRssiInfo;
+    
+    /** 写标记到日志 */
+    private EditText mark_edit;
         
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +189,9 @@ public class locationActivity extends Activity {
         SamplePeriod_edit = (EditText)findViewById(R.id.SamplePeriod_edit);
         SamplePeriod_edit.setText("10");  // 10s
         onSamplePeriod(null);
+        
+        /** 写标记到日志 */
+        mark_edit = (EditText)findViewById(R.id.Mark_edt);
                 
         // 数据库管理, 获取数据库中存储的各个定位参考点的beacons的rssi平均值
         mRssiDbManager = new RssiDbManager(locationActivity.this);
@@ -288,6 +294,13 @@ public class locationActivity extends Activity {
     	String period_str = SamplePeriod_edit.getText().toString();
     	int SamplePeroid = (int)(Double.parseDouble(period_str) * 1000.0D);
         FindBeacons.setSampleExpirationMilliseconds(SamplePeroid);   
+    }
+    
+    /** 写标记到日志 */
+    public void onMark(View view) {
+    	String str = "***" + mark_edit.getText().toString() + "***";
+    	LogManager.d(TAG, str);
+    	logToDisplay(str);
     }
      
     public void logToDisplay(final String line) {
